@@ -23,6 +23,7 @@
 import argparse
 import random
 
+#check if the lists have assigned an individual to itself
 def comparelistlines(list1, list2):
     same = 0
     for i in range(0,len(list1)):
@@ -34,6 +35,7 @@ def comparelistlines(list1, list2):
     else:
         return False
 
+#read the commandline arguments
 parser = argparse.ArgumentParser( description="Definiere wer mit wem wichteln soll", add_help=True, usage="%(prog)s -f NAMENSLISTE -o WICHTELLISTE [-v]")
 parser.add_argument("-f", "--file", dest="filename", type=str, help="Gebe die NAMENSLISTE mit der Liste der Teilnehmer an. Diese sollte pro Zeile nur einen Teilnehmer enthalten", metavar="NAMENSLISTE")
 parser.add_argument("-o", "--output", dest="output", type=str, help="Gebe die Liste in die WICHTELLISTE aus", metavar="WICHTELLISTE")
@@ -55,12 +57,14 @@ while(tautologies==1):
     if(comparelistlines(Namelist,Namelist_copy)):
         tautologies=0
 
+#print the list into a given file
 if args.output:
     outfile = open(args.output,'w')
     for i in range(0,len(Namelist)):
         outfile.write(Namelist[i].rstrip() + '   \t' + Namelist_copy[i])
     outfile.close()
 
+#print the List on screen
 if(args.verbose==True):
      for i in range(0,len(Namelist)):
         print(Namelist[i].rstrip() + '   \t' + Namelist_copy[i].rstrip())
